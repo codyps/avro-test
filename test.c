@@ -40,20 +40,9 @@ int main(int argc, char **argv)
 
 	int i;
 	avro_value_t elem;
-	size_t idx;
 	for (i = 0; i < ARRAY_SIZE(foo); i++) {
-		int bar;
-		r = avro_generic_int_new(&elem, i);
-		if (r < 0)
-			return 3;
-		avro_value_get_int(&elem, &bar);
-		print_value(&elem, stdout);
-		print_value(&value, stdout);
-		//avro_value_set_int(&elem, i);
-		r = avro_value_append(&value, &elem, &idx);
-		if (r < 0)
-			return 4;
-		printf("BAR=%d, idx=%zu\n", bar, idx);
+		r = avro_value_append(&value, &elem, NULL);
+		avro_value_set_int(&elem, foo[i]);
 	}
 
 
